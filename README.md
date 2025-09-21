@@ -27,8 +27,8 @@ The platform supports **role-based access control**, **job postings**, **applica
 | PostgreSQL   | Relational database                      |
 | JWT          | Secure authentication & role management |
 | Swagger      | API documentation                        |
-| Redis (opt.) | Caching for faster job search            |
-| Docker (opt.)| Containerization for deployment          |
+| Redis (optional with time) | Caching for faster job search            |
+| Docker (optional with time)| Containerization for deployment          |
 
 ---
 
@@ -55,8 +55,8 @@ prodev-jobboard-backend/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/prodev-jobboard-backend.git
-cd prodev-jobboard-backend
+git clone https://github.com/BeamlakF/prodev-job-platform-backend.git
+cd jobplatform_backend
 ````
 
 ### 2. Create Virtual Environment & Install Dependencies
@@ -69,45 +69,6 @@ venv\Scripts\activate      # On Windows
 pip install -r requirements.txt
 ```
 
-### 3. Configure Database
-
-Create a PostgreSQL database and update `config/settings.py`:
-
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jobboard',
-        'USER': 'postgres',
-        'PASSWORD': 'yourpassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-```
-
-Run migrations:
-
-```bash
-python manage.py migrate
-```
-
-### 4. Create Superuser (Admin)
-
-```bash
-python manage.py createsuperuser
-```
-
-### 5. Run Server
-
-```bash
-python manage.py runserver
-```
-
-The API will be available at: `http://127.0.0.1:8000/`
-
----
-
 ## 🐳 Running with Docker (Optional)
 
 If using Docker + Docker Compose:
@@ -118,7 +79,7 @@ docker-compose up --build
 
 Services:
 
-* `web` → Django backend (`localhost:8000`)
+* `web` → Django backend 
 * `db` → PostgreSQL
 * `redis` → Redis cache
 
@@ -141,15 +102,6 @@ This project uses **JWT Authentication**.
 
 ---
 
-## 📘 API Documentation
-
-Interactive docs available at:
-
-```
-http://localhost:8000/api/docs/
-```
-
----
 
 ## 📊 Commit Workflow
 
