@@ -8,10 +8,19 @@ from django.core.cache import cache
 from .models import User, Category, Job, Application
 from .serializers import UserSerializer, CategorySerializer, JobSerializer, ApplicationSerializer
 from .filters import JobFilter
+from rest_framework.permissions import AllowAny
+from rest_framework import generics
 
 # ----------------------------
 # Custom Permissions
 # ----------------------------
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = UserSerializer
+
+
 class IsOwnerOrAdmin(permissions.BasePermission):
     """Allow object owners or admins to edit; others read-only."""
     def has_object_permission(self, request, view, obj):
