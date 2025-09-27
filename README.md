@@ -1,144 +1,87 @@
-# ProDev Job Board Backend
+# Job Board Backend  
 
-A backend system for a **Job Board Platform**, built with **Django, PostgreSQL, JWT, and Swagger**.  
-The platform supports **role-based access control**, **job postings**, **applications**, and **optimized job search**.
+A Django REST Framework backend for a job board platform with role-based authentication, efficient database queries, and Swagger API documentation.  
 
----
+## 🚀 Features  
+- User authentication with **roles** (`admin`, `user`)  
+- Admins can **create job postings**  
+- Users can **browse and filter job postings**  
+- Optimized database with **indexes** for fast queries  
+- API documentation with **Swagger (drf-yasg)**  
 
-## 🚀 Features
-- **Job Posting Management**
-  - CRUD operations for jobs.
-  - Categorize jobs by **industry, location, type**.
-- **Role-Based Authentication**
-  - **Admins** → manage jobs and categories.
-  - **Users** → apply for jobs and manage applications.
-- **Optimized Job Search**
-  - Indexed queries for fast filtering.
-  - (Optional) Redis caching for frequently searched jobs.
-- **API Documentation**
-  - Interactive Swagger docs available at `/api/docs`.
+## 🛠 Tech Stack  
+- **Django** + **Django REST Framework**  
+- **PostgreSQL** (or MySQL if required)  
+- **drf-yasg** for Swagger docs 
+- **Redis** for Cache
+- **JWT** for authentication 
 
----
+## ⚙️ Setup  
 
-## 🛠️ Technologies
-| Technology   | Purpose                                  |
-|--------------|------------------------------------------|
-| Django       | Backend framework for APIs               |
-| PostgreSQL   | Relational database                      |
-| JWT          | Secure authentication & role management |
-| Swagger      | API documentation                        |
-| Redis (optional with time) | Caching for faster job search            |
-| Docker (optional with time)| Containerization for deployment          |
-
----
-
-## 📂 Project Structure
-```
-
-prodev-jobboard-backend/
-│
-├── jobs/               # Job postings app
-├── categories/         # Job categories app
-├── applications/       # Job applications app
-├── users/              # User authentication & roles
-├── config/             # Django project settings
-│
-├── requirements.txt    # Dependencies
-├── docker-compose.yml  # Docker services (web, db, redis)
-└── README.md           # Project documentation
-
-````
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repository
+### 1. Clone the repo  
 ```bash
 git clone https://github.com/BeamlakF/prodev-job-platform-backend.git
-cd jobplatform_backend
+cd prodev-job-platform-backend
 ````
 
-### 2. Create Virtual Environment & Install Dependencies
+### 2. Create virtual environment & install dependencies
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # On Linux/Mac
-venv\Scripts\activate      # On Windows
+source venv/bin/activate   # macOS/Linux
+venv\Scripts\activate      # Windows
 
 pip install -r requirements.txt
 ```
 
-## 🐳 Running with Docker (Optional)
+### 3. Configure environment variables
 
-If using Docker + Docker Compose:
+Create a `.env` file in the project root:
+
+
+### 4. Run migrations
 
 ```bash
-docker-compose up --build
+python manage.py migrate
 ```
 
-Services:
+### 5. Run server
 
-* `web` → Django backend 
-* `db` → PostgreSQL
-* `redis` → Redis cache
-
----
-
-## 🔑 API Authentication
-
-This project uses **JWT Authentication**.
-
-* Obtain a token by logging in:
-
-  ```
-  POST /api/token/
-  ```
-* Use the token in headers:
-
-  ```
-  Authorization: Bearer <your-token>
-  ```
-
----
-
-
-## 📊 Commit Workflow
-
-* `feat:` → new features
-* `fix:` → bug fixes
-* `perf:` → performance improvements
-* `docs:` → documentation updates
-* `chore:` → setup/config changes
-
----
-
-## 📤 Deployment
-
-* Deploy using **Docker** or directly to **Render / Railway / Heroku**.
-* Ensure environment variables are set for:
-
-  * `SECRET_KEY`
-  * `DATABASE_URL`
-  * `REDIS_URL` (optional)
-
----
-
-## ✅ Evaluation Criteria
-
-1. **Functionality** → CRUD operations, role-based access, job applications.
-2. **Code Quality** → Django best practices, clean schema design.
-3. **Performance** → Optimized queries & indexing.
-4. **Documentation** → Swagger + README clarity.
-
----
-
-## 📄 License
-
-This project is for educational purposes under the **alx's ProDev BE program**.
-
+```bash
+python manage.py runserver
 ```
 
----
+## 📖 API Documentation
 
+Once the server is running, visit:
+
+* Swagger UI: [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/)
+
+## 🔑 API Endpoints
+
+### Authentication
+
+* `POST /api/auth/login/` – Login with username & password
+* `POST /api/auth/logout/` – Logout
+
+### Jobs
+
+* `GET /api/jobs/` – List all jobs (users & admins)
+* `POST /api/jobs/` – Create job (admins only)
+* `GET /api/jobs/{id}/` – Retrieve a job
+* `PUT /api/jobs/{id}/` – Update job (admins only)
+* `DELETE /api/jobs/{id}/` – Delete job (admins only)
+
+### Users
+
+* `GET /api/users/` – List all users (admins only)
+
+## 📊 Database Optimization
+
+* Indexed `title` and `company` fields in job model for faster search
+* Used `select_related` and `prefetch_related` where applicable
+
+### alx cohort 2, project nexus
+
+### September 28, 2025
 
