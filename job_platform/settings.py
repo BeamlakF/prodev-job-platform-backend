@@ -167,14 +167,18 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     "COMPONENT_SPLIT_REQUEST": True,
 
-    "SECURITY": [{"bearerAuth": []}],
+    # Swagger auth settings
+    "SECURITY": [{"BearerAuth": []}],
     "COMPONENTS": {
         "securitySchemes": {
-            "bearerAuth": {
+            "BearerAuth": {           # This name must match SECURITY above
                 "type": "http",
                 "scheme": "bearer",
                 "bearerFormat": "JWT",
             }
         }
+    },
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True,  # Keep the token after page reload
     },
 }
